@@ -1,0 +1,98 @@
+<!-- <html> -->
+   <!-- <head> -->
+      <!-- <title>AngularJS First Application</title> -->
+   <!-- </head> -->
+   
+   <!-- <body> -->
+      <!-- <h1>Sample Application</h1> -->
+      
+      <!-- <div ng-app = ""> -->
+         <!-- <p>Enter your Name: <input type = "text" ng-model = "name"></p> -->
+         <!-- <p>Hello <span ng-bind = "name"></span>!</p> -->
+      <!-- </div> -->
+      
+      <!-- <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"> -->
+      <!-- </script> -->
+      
+   <!-- </body> -->
+<!-- </html> -->
+
+<!-- <!DOCTYPE html> -->
+<!-- <html ng-app="taskApp"> -->
+<!-- <head> -->
+  <!-- <meta charset="UTF-8"> -->
+  <!-- <title>Task Management</title> -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script> -->
+  <!-- <script src="app.js"></script> -->
+<!-- </head> -->
+<!-- <body> -->
+  <!-- <div ng-controller="TaskController as taskCtrl"> -->
+    <!-- <h1>Task Management</h1> -->
+    
+    <!-- <div ng-app=" "> -->
+    <!-- <form ng-submit="taskCtrl.addTask()"> -->
+      <!-- <input type="text" ng-model="taskCtrl.newTask" placeholder="Add Task"> -->
+      <!-- <button type="submit">Add</button> -->
+    <!-- </form> -->
+    
+    <!-- <ul> -->
+      <!-- <li ng-repeat="task in taskCtrl.tasks"> -->
+         <!-- {{task}} -->
+
+        <!-- <button ng-click="taskCtrl.editTask(task)">Edit</button> -->
+        <!-- <button ng-click="taskCtrl.deleteTask(task)">Delete</button> -->
+      <!-- </li> -->
+    <!-- </ul> -->
+  <!-- </div> -->
+<!-- </body> -->
+<!-- </html> -->
+
+
+<!DOCTYPE html>
+<html ng-app="taskManagerApp">
+
+<head>
+  <title>Task Manager</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+  <script src="app.js"></script>
+</head>
+
+<body ng-controller="TaskController as taskCtrl">
+  <h1>Task Manager</h1>
+
+  <form ng-submit="taskCtrl.addTask()">
+    <input type="text" ng-model="taskCtrl.newTask" placeholder="Add Task" required>
+    <button type="submit">Add</button>
+  </form>
+
+  <label>Filter: <input type="text" ng-model="taskCtrl.filterText"></label>
+
+  <table>
+    <tr>
+      <th ng-click="taskCtrl.sort('title')">Task</th>
+      <th ng-click="taskCtrl.sort('assignedTo')">Assigned To</th>
+      <th>Action</th>
+    </tr>
+    <tr ng-repeat="task in taskCtrl.filteredTasks = (taskCtrl.tasks | filter:taskCtrl.filterText | orderBy:taskCtrl.sortColumn)">
+      <td>{{ task.title }}</td>
+      <td>{{ task.assignedTo }}</td>
+      <td>
+        <button ng-click="taskCtrl.editTask(task)">Edit</button>
+        <button ng-click="taskCtrl.deleteTask(task)">Delete</button>
+      </td>
+    </tr>
+  </table>
+
+  <div ng-show="taskCtrl.editMode">
+    <h2>Edit Task</h2>
+    <form ng-submit="taskCtrl.updateTask()">
+      <input type="text" ng-model="taskCtrl.editTask.title" required>
+      <input type="text" ng-model="taskCtrl.editTask.assignedTo" required>
+      <button type="submit">Update</button>
+      <button ng-click="taskCtrl.cancelEdit()">Cancel</button>
+    </form>
+  </div>
+
+</body>
+
+</html>
